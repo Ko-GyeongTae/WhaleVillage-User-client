@@ -1,0 +1,26 @@
+import React from 'react';
+import { StyleSheet, View } from 'react-native'
+import { WebView } from 'react-native-webview';
+
+export default ({ link }) => {
+    console.log(link);
+    return (
+        <View style={Component.Video}>
+          <WebView
+            javaScriptEnabled={true}
+            useWebKit={true}
+            domStorageEnabled={true}
+            allowsInlineMediaPlayback={true}
+            source={{ uri: link }}
+          />
+        </View>
+    );
+}
+
+const Component = StyleSheet.create({
+    Video: { 
+      paddingTop: 40, 
+      width: 400, 
+      height: 290 
+    }
+  });
