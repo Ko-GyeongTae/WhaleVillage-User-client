@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Linking } from 'react-native';
-import { WebView } from 'react-native-webview';
+import { StyleSheet, View, Text, TouchableOpacity, Linking, Image } from 'react-native';
+import YoutubePlayer from '../components/YoutubePlayer';
 
-export default() => {
-  const [appIsReady, setAppIsReady] = useState(false);
+export default ({navigation}) => {
   const cdnlink = 'https://cdn.podbbang.com/data1/jhunsong59/sbook004.mp3';
+  //const youtube = "https://www.youtube.com/embed/TcMBFSGVi1c?playsinline=1&fs=1";
+  const youtube = "https://www.youtube.com/embed/qGmJxG9Z4Bo";
 
-  const [align, setAlign] = useState('center');
-  const [alignsecond, setAlignsecond] = useState(false);
-
-  setTimeout(() => {
-    setAlign('flex-start'), setAlignsecond(true);
-  }, 3000);
   const LinkToCdn = () => {
     Linking.canOpenURL(cdnlink)
     .then(supported => {
@@ -22,30 +17,25 @@ export default() => {
       }
     })
   }
+
   return (
     <View>
       <View style={Style.Header}>
         <Text style={FontStyle.Title}>고래산마을</Text>
+        <Image style={Component.Img} source={require('../../assets/whale.png')} />
       </View>
       <View style={Style.Body}>
-
-        <View style={{ paddingTop: 50, width: 400, height: 290 }}>
-          <WebView
-            javaScriptEnabled={true}
-            useWebKit={true}
-            domStorageEnabled={true}
-            allowsInlineMediaPlayback={true}
-            source={{ uri: "https://www.youtube.com/embed/TcMBFSGVi1c?playsinline=1&fs=1" }}
-          />
-        </View>
+        <YoutubePlayer link={youtube}/>
+        <TouchableOpacity onPress={() => navigation.navigate('MediaList')}>
+          <Text>더보기</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => LinkToCdn()}>
           <View style={Component.cdn}>
-            <Text>CDN LINK</Text>I 
+            <Text>CDN LINK</Text>
           </View>
         </TouchableOpacity>
       </View>
       <View style={Style.Footer}>
-
       </View>
     </View>
   );
@@ -54,12 +44,13 @@ export default() => {
 const FontStyle = StyleSheet.create({
   Title: {
     fontSize: 40,
-    paddingTop: 20,
+    fontWeight: 'bold',
   },
 });
 
 const Style = StyleSheet.create({
   Header: {
+    flexDirection: 'row',
     backgroundColor: 'red',
     width: '100%',
     height: 120,
@@ -84,5 +75,14 @@ const Component = StyleSheet.create({
     width: 120,
     height: 40,
     backgroundColor: 'pink',
+  },
+  Img: {
+    width: 90,
+    height: 50,
+  },
+  Video: { 
+    paddingTop: 40, 
+    width: 400, 
+    height: 290 
   }
-})
+});

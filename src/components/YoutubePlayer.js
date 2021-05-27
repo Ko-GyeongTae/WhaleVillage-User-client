@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { WebView } from 'react-native-webview';
 
 export default ({ link }) => {
-    console.log(link);
+    console.log("INSIDE PLAYER : " + link);
     return (
         <View style={Component.Video}>
           <WebView
