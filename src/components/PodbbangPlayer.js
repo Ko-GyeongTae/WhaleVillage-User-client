@@ -19,8 +19,7 @@ export default ({ link }) => {
 
 const Component = StyleSheet.create({
     Video: { 
-      paddingTop: 10,
-      width: 350, 
-      height: 700,
+      width: '100%', 
+      height: '100%',
     }
   });
