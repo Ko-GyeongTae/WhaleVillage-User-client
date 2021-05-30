@@ -6,6 +6,7 @@ import MediaList from '../screens/MediaList';
 import NoticeList from '../screens/NoticeList';
 import NoticeDetail from '../screens/NoticeDetail';
 import Podbbang from '../screens/Podbbang';
+import PodbbangDetail from "../screens/PodbbangDetail";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export default () => (
       <Stack.Screen name="NoticeList" component={NoticeList} />
       <Stack.Screen name="NoticeDetail" component={NoticeDetail} />
       <Stack.Screen name="Podbbang" component={Podbbang} />
+      <Stack.Screen name="PodbbangDetail" component={PodbbangDetail} />
     </Stack.Navigator>
   </NavigationContainer>
 );
