@@ -20,7 +20,7 @@ const Component = StyleSheet.create({
         alignItems: 'flex-start',
     },
     Bottom:{
-        lignItems: 'flex-end',
+        alignItems: 'flex-end',
         paddingBottom: 5,
         paddingRight: 5,
     }
@@ -28,13 +28,13 @@ const Component = StyleSheet.create({
 
 const FontStyle = StyleSheet.create({
     Title: {
-        color: black,
-        fontWeight: bold,
+        color: 'black',
+        fontWeight: 'bold',
         fontSize: 20,
     },
     Day:{
         fontSize: 15,
-        color: black,
+        color: 'black',
     }
 });
 
@@ -46,7 +46,7 @@ export default (props) => {
         <Text style={FontStyle.Title}>{props.title}</Text>
       </View>
       <View style={Component.Bottom}>
-        <Day style={FontStyle.Day}>{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}일 ${date.getHours() > 12 ? `오후 ${date.getHours() - 12}` : `오전 ${date.getHours()}`}시 ${date.getMinutes()}분 ${date.getSeconds()}초`}</Day>
+        <Text style={FontStyle.Day}>{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}일 ${date.getHours() > 12 ? `오후 ${date.getHours() - 12}` : `오전 ${date.getHours()}`}시 ${date.getMinutes()}분 ${date.getSeconds()}초`}</Text>
       </View>
     </TouchableOpacity>
   );
