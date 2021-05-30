@@ -34,12 +34,15 @@ export default ({ navigation }) => {
       <View style={Style.Body}>
         <YoutubePlayer link={youtube} />
         <TouchableOpacity onPress={() => navigation.navigate('MediaList')}>
-          <Text>더보기</Text>
+          <Text style={FontStyle.More}>더보기</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => LinkToCdn()}>
           <View style={Component.cdn}>
-            <Text>CDN LINK</Text>
+            <Text style={FontStyle.CDN}>팟빵 링크</Text>
           </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Podbbang')}>
+          <Text style={FontStyle.More}>더보기</Text>
         </TouchableOpacity>
         <SliderBox
           autoplay={true}  //자동 슬라이드 넘김
@@ -54,24 +57,6 @@ export default ({ navigation }) => {
             console.log(imagelist[currentIndex]);
           }}
         />
-        <View
-          style={{
-            position: 'absolute',
-            bottom: '8%',
-            right: 0,
-            paddingTop: 4,
-            paddingRight: 6,
-            paddingBottom: 4,
-            paddingLeft: 10,
-            borderTopLeftRadius: 14,
-            borderBottomLeftRadius: 14,
-            backgroundColor: 'rgba(0,0,0,0.6)',
-          }}>
-          <Text style={{ fontSize: 10, color: '#ffffff' }}>
-            Hello
-        </Text>
-        </View>
-
       </View>
       <View style={Style.Footer}>
       </View>
@@ -84,43 +69,55 @@ const FontStyle = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
   },
+  CDN: {
+    fontSize: 30,
+  },
+  More:{
+    fontSize: 20
+  }
 });
 
 const Style = StyleSheet.create({
   Header: {
     flexDirection: 'row',
-    backgroundColor: 'red',
+    backgroundColor: '#f9f9f9',
     width: '100%',
-    height: 120,
+    height: '10%',
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 5,
   },
   Body: {
-    backgroundColor: 'orange',
+    backgroundColor: '#f0f0f0',
     width: '100%',
-    height: 700,
+    height: '80%',
     alignItems: 'center',
   },
   Footer: {
-    backgroundColor: 'yellow',
+    backgroundColor: '#f9f9f9',
     width: '100%',
-    height: 100,
+    height: '10%',
+    elevation: 5,
   }
 });
 
 const Component = StyleSheet.create({
   cdn: {
-    width: 120,
+    width: 350,
     height: 40,
-    backgroundColor: 'pink',
+    backgroundColor: '#ffffff',
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5,
   },
   Img: {
     width: 90,
     height: 50,
   },
-  Video: {
-    paddingTop: 40,
-    width: 400,
-    height: 290
+  Button: {
+    width: '33.3%',
+    height: 100,
+    backgroundColor: 'green',
   }
 });
