@@ -2,14 +2,26 @@ import React from "react";
 import { StyleSheet, ScrollView, Text, View } from "react-native";
 import YoutubePlayer from "../components/YoutubePlayer";
 import PTRView from "react-native-pull-to-refresh";
+import { useState } from "react";
+import axios from "axios";
+import { baseUri } from "../../env";
+import { useEffect } from "react";
 
 export default () => {
-    const youtubelist = [
-        "https://www.youtube.com/embed/qGmJxG9Z4Bo",
-        "https://www.youtube.com/embed/W4gWRK-_It8",
-    ];
-    const count = youtubelist.length;
-
+    const [youtubeList, setYoutubeList] = useState([]);
+    const getList = async() => {
+        await axios.get(`${baseUri.outter_net}/api/v1/link/youtube`)
+        .then(res => {
+            setYoutubeList(res.data);
+        })
+        .catch(e => {
+            console.log(e);
+        })
+    } 
+    const count = youtubeList.length;
+    useEffect(() => {
+        getList();
+    }, []);
     return (
         <View style={Component.Container}>
             <View style={Style.Body}>
@@ -17,6 +29,7 @@ export default () => {
                     style={Component.List}
                     onRefresh={() => {
                         console.log('refresh!');
+                        getList();
                     }}
                     pullHeight={400}
                 >
@@ -29,8 +42,9 @@ export default () => {
                         }}
                     >
                         {count === 0 && <Text>게시물이 없습니다.</Text>}
-                        {youtubelist?.map(media => (
-                            <YoutubePlayer key={media} link={media} />
+                        {youtubeList?.map(media => (
+                            console.log(media),
+                            <YoutubePlayer key={media.uid} link={media.link} />
                         ))}
                     </ScrollView>
                 </PTRView>
