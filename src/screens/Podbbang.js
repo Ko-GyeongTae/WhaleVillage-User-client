@@ -24,9 +24,6 @@ export default ({navigation}) => {
 
     return (
         <View style={Component.Container}>
-            <View style={Style.Header}>
-                <Text style={Component.Title}>영상목록</Text>
-            </View>
             <View style={Style.Body}>
                 <PTRView
                     style={Component.List}
@@ -59,14 +56,6 @@ export default ({navigation}) => {
 };
 
 const Style = StyleSheet.create({
-    Header: {
-        width: '100%',
-        height: '10%',
-        backgroundColor: '#ffffff',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        elevation: 5,
-    },
     Body: {
         width: '100%',
         height: '90%',
@@ -80,8 +69,5 @@ const Component = StyleSheet.create({
     },
     List:{
         backgroundColor: "#f0f0f0"
-    },
-    Title: {
-        fontSize: 40
     }
 })

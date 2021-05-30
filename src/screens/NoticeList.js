@@ -62,14 +62,6 @@ export default ({navigation}) => {
 };
 
 const Style = StyleSheet.create({
-    Header: {
-        width: '100%',
-        height: '10%',
-        backgroundColor: '#ffffff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        elevation: 5,
-    },
     Body: {
         width: '100%',
         height: '90%',
@@ -83,8 +75,5 @@ const Component = StyleSheet.create({
     },
     List:{
         backgroundColor: "#f0f0f0"
-    },
-    Title: {
-        fontSize: 30
     }
 })

@@ -30,10 +30,6 @@ export default ({ route }) => {
     }
     return (
         <View style={Style.Container}>
-            <View style={Style.Header}>
-                <Text style={FontStyle.Title}>{post.title}</Text>
-                <Text>{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate() - 1 < 10 ? "0" + date.getDate() - 1 : date.getDate()}일`}</Text>
-            </View>
             <View style={Style.TextBox}>
                 <Text style={{ padding: 10 }}>{post.contents}</Text>
                 <View>
@@ -56,13 +52,6 @@ const Style = StyleSheet.create({
         justifyContent: 'flex-start',
         backgroundColor: '#f1f1f1',
     },
-    Header: {
-        backgroundColor: '#ffffff',
-        height: '10%',
-        width: '100%',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
     TextBox: {
         width: 340,
         height: '80%',
@@ -74,11 +63,5 @@ const Style = StyleSheet.create({
     ImageBox: {
         width: 100,
         height: 100,
-    }
-});
-
-const FontStyle = StyleSheet.create({
-    Title: {
-        fontSize: 20
     }
 });
