@@ -5,8 +5,7 @@ import { SliderBox } from 'react-native-image-slider-box';
 import { url } from '../../env';
 
 export default ({ navigation }) => {
-  const cdnlink = 'https://cdn.podbbang.com/data1/jhunsong59/sbook004.mp3';
-  //const youtube = "https://www.youtube.com/embed/TcMBFSGVi1c?playsinline=1&fs=1";
+  const cdnlink = 'https://m.podbbang.com/channels/1779381';
   const youtube = "https://www.youtube.com/embed/qGmJxG9Z4Bo";
 
   const imagelist = [
@@ -110,7 +109,8 @@ const Style = StyleSheet.create({
     width: '100%',
     height: '10%',
     justifyContent: 'center',
-    alignItems: 'center',
+    paddingBottom: 10,
+    alignItems: 'flex-end',
     elevation: 5,
   },
   Body: {

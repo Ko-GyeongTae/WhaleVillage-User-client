@@ -13,7 +13,7 @@ export default () => {
     return (
         <View style={Component.Container}>
             <View style={Style.Header}>
-                <Text style={Style.Title}>영상목록</Text>
+                <Text style={Component.Title}>영상목록</Text>
             </View>
             <View style={Style.Body}>
                 <PTRView
@@ -48,7 +48,7 @@ const Style = StyleSheet.create({
         height: '10%',
         backgroundColor: '#ffffff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         elevation: 5,
     },
     Body: {
@@ -66,6 +66,6 @@ const Component = StyleSheet.create({
         backgroundColor: "#f0f0f0"
     },
     Title: {
-        fontSize: 30
+        fontSize: 40
     }
 })

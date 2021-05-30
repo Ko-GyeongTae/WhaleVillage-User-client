@@ -14,6 +14,7 @@ export default ({ route }) => {
         await axios.get(`${baseUri.outter_net}/api/v1/post/${route.params.uid}`)
             .then(res => {
                 setPost(res.data);
+                console.log(res.data);
             })
             .catch(e => {
                 console.log(e);
@@ -38,7 +39,8 @@ export default ({ route }) => {
                 <View>
                     {!post.media && <Text>이미지가 없습니다.</Text>}
                     {post.media.map(m => {
-                        <Image style={{width: 100, height: 100, backgroundColor: 'red'}}source={{ uri: `${baseUri.outter_net}/api/v1/media/${m}`}} />
+                        console.log(`${baseUri.outter_net}/api/v1/media/${m}`),
+                        <Image style={{width: 100, height: 100, backgroundColor: 'red'}} source={{ uri: `${baseUri.outter_net}/api/v1/media/${m}`}} />
                     })}
                 </View>
             </View>
