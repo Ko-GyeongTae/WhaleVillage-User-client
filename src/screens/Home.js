@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Linking, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Linking, Image, Alert } from 'react-native';
 import YoutubePlayer from '../components/YoutubePlayer';
 import { SliderBox } from 'react-native-image-slider-box';
+import { url } from '../../env';
 
 export default ({ navigation }) => {
   const cdnlink = 'https://cdn.podbbang.com/data1/jhunsong59/sbook004.mp3';
@@ -14,15 +15,19 @@ export default ({ navigation }) => {
     "https://source.unsplash.com/1024x768/?girl",
     "https://source.unsplash.com/1024x768/?tree",
   ];
-  const LinkToCdn = () => {
-    Linking.canOpenURL(cdnlink)
-      .then(supported => {
-        if (supported) {
-          Linking.openURL(cdnlink);
-        } else {
-          console.log(`${cdnlink} is not correct!`);
-        }
-      })
+  const LinkTo = (link) => {
+    try {
+      Linking.canOpenURL(link)
+        .then(supported => {
+          if (supported) {
+            Linking.openURL(link);
+          } else {
+            console.log(`${link} is not correct!`);
+          }
+        });
+    } catch (e) {
+      Alert.alert('유효하지 않은 링크입니다.');
+    }
   }
 
   return (
@@ -36,7 +41,7 @@ export default ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('MediaList')}>
           <Text style={FontStyle.More}>더보기</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => LinkToCdn()}>
+        <TouchableOpacity onPress={() => LinkTo(cdnlink)}>
           <View style={Component.cdn}>
             <Text style={FontStyle.CDN}>팟빵 링크</Text>
           </View>
@@ -44,21 +49,34 @@ export default ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('Podbbang')}>
           <Text style={FontStyle.More}>더보기</Text>
         </TouchableOpacity>
-        <SliderBox
-          autoplay={true}  //자동 슬라이드 넘김
-          circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
-          resizeMode="cover"  // 이미지 사이즈 조절값
-          images={imagelist} // 이미지 주소 리스트 
-          dotColor="rgba(0,0,0,0)" // 아래 점 투명으로 안보이게 가림
-          inactiveDotColor="rgba(0,0,0,0)"
-          ImageComponentStyle={{ width: 350, height: 240 }} // 이미지 Style 적용
-          currentImageEmitter={(currentIndex) => { // 이미지가 바뀔때 어떤 동작을 할지 설정 
-            console.log(currentIndex + 1);
-            console.log(imagelist[currentIndex]);
-          }}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('NoticeList')}>
+          <View style={Component.notice}>
+            <Text style={FontStyle.Notice}>공지사항</Text>
+          </View>
+        </TouchableOpacity>
+        <View>
+          <SliderBox
+            autoplay={true}  //자동 슬라이드 넘김
+            disableOnPress={true}
+            circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
+            images={imagelist} // 이미지 주소 리스트 
+            dotColor="#000000" // 아래 점 투명으로 안보이게 가림
+            inactiveDotColor="#000000"
+            onCurrentImagePressed={() => console.log('notice')}
+            ImageComponentStyle={{ width: 350, height: 207 }} // 이미지 Style 적용
+          />
+        </View>
       </View>
       <View style={Style.Footer}>
+        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => LinkTo(url.inquiry)}>
+          <Text style={FontStyle.Redirect}>문의</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => LinkTo(url.introduce)}>
+          <Text style={FontStyle.Redirect}>마을소개</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => LinkTo(url.product)}>
+          <Text style={FontStyle.Redirect}>특산품</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -72,8 +90,16 @@ const FontStyle = StyleSheet.create({
   CDN: {
     fontSize: 30,
   },
-  More:{
-    fontSize: 20
+  More: {
+    fontSize: 20,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  Redirect: {
+    fontSize: 40,
+  },
+  Notice: {
+    fontSize: 30,
   }
 });
 
@@ -94,7 +120,10 @@ const Style = StyleSheet.create({
     alignItems: 'center',
   },
   Footer: {
+    flexDirection: 'row',
     backgroundColor: '#f9f9f9',
+    justifyContent: 'center',
+    alignContent: 'center',
     width: '100%',
     height: '10%',
     elevation: 5,
@@ -106,7 +135,15 @@ const Component = StyleSheet.create({
     width: 350,
     height: 40,
     backgroundColor: '#ffffff',
-    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5,
+  },
+  notice: {
+    width: 350,
+    height: 40,
+    marginTop: 10,
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5,
@@ -114,10 +151,5 @@ const Component = StyleSheet.create({
   Img: {
     width: 90,
     height: 50,
-  },
-  Button: {
-    width: '33.3%',
-    height: 100,
-    backgroundColor: 'green',
   }
 });
