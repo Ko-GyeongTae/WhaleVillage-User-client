@@ -20,9 +20,10 @@ const Style = StyleSheet.create({
     Header: {
         width: '100%',
         height: '10%',
+        flexDirection: 'row',
         backgroundColor: '#ffffff',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
         elevation: 5,
     },
     Body: {

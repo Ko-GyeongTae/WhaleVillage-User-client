@@ -12,13 +12,13 @@ const Stack = createStackNavigator();
 
 export default () => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="Home" headerMode="none">
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="MediaList" component={MediaList} />
-      <Stack.Screen name="NoticeList" component={NoticeList} />
-      <Stack.Screen name="NoticeDetail" component={NoticeDetail} />
-      <Stack.Screen name="Podbbang" component={Podbbang} />
-      <Stack.Screen name="PodbbangDetail" component={PodbbangDetail} />
+    <Stack.Navigator initialRouteName="Home" >
+      <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
+      <Stack.Screen name="MediaList" component={MediaList} options={{headerTitle: '영상목록'}}/>
+      <Stack.Screen name="NoticeList" component={NoticeList} options={{headerTitle: '공지목록'}}/>
+      <Stack.Screen name="NoticeDetail" component={NoticeDetail} options={{headerTitle: '공지'}}/>
+      <Stack.Screen name="Podbbang" component={Podbbang} options={{headerTitle: '팟빵목록'}}/>
+      <Stack.Screen name="PodbbangDetail" component={PodbbangDetail} options={{headerTitle: '팟빵'}}/>
     </Stack.Navigator>
   </NavigationContainer>
 );
