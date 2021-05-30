@@ -48,10 +48,9 @@ export default ({ navigation }) => {
           images={imagelist} // 이미지 주소 리스트 
           dotColor="rgba(0,0,0,0)" // 아래 점 투명으로 안보이게 가림
           inactiveDotColor="rgba(0,0,0,0)"
-          ImageComponentStyle={{ width: 200, height: 200 }} // 이미지 Style 적용
+          ImageComponentStyle={{ width: 350, height: 240 }} // 이미지 Style 적용
           currentImageEmitter={(currentIndex) => { // 이미지가 바뀔때 어떤 동작을 할지 설정 
             console.log(currentIndex + 1);
-
             console.log(imagelist[currentIndex]);
           }}
         />

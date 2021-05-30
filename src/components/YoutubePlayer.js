@@ -20,7 +20,7 @@ export default ({ link }) => {
 const Component = StyleSheet.create({
     Video: { 
       paddingTop: 40, 
-      width: 400, 
-      height: 290 
+      width: 350, 
+      height: 240 
     }
   });
