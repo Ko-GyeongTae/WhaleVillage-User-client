@@ -1,26 +1,30 @@
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { StyleSheet, ScrollView, Text, View } from "react-native";
 import PTRView from "react-native-pull-to-refresh";
+import { baseUri } from "../../env";
 import NoticeBox from "../components/NoticeBox";
 import PodbbangBox from "../components/PodbbangBox";
 import PodbbangPlayer from "../components/PodbbangPlayer";
 
 export default ({navigation}) => {
-    const podbbanglist = [
-        {
-            "uid": 1,
-            "title": "전쟁사, 동양전쟁사146",
-            "link": "https://m.podbbang.com/channels/10887/episodes/24053562",
-            "isPrimary": false,
-        },
-        {
-            "uid": 2,
-            "title": "테스트 테스트",
-            "link": "https://m.podbbang.com/channels/1779381",
-            "isPrimary": true,
-        }
-    ];
-    const count = podbbanglist.length;
+    const [podbbangList, setPodbbangList] = useState([]);
+    const getList = async() => {
+        await axios.get(`${baseUri.outter_net}/api/v1/link/podbbang`)
+        .then(res => {
+            setPodbbangList(res.data);
+        })
+        .catch(e => {
+            console.log(e);
+        })
+    } 
+
+    const count = podbbangList.length;
+    useEffect(() => {
+        getList()
+    }, []);
 
     return (
         <View style={Component.Container}>
@@ -28,6 +32,7 @@ export default ({navigation}) => {
                 <PTRView
                     style={Component.List}
                     onRefresh={() => {
+                        getList();
                         console.log('refresh!');
                     }}
                     pullHeight={400}
@@ -41,7 +46,7 @@ export default ({navigation}) => {
                         }}
                     >
                         {count === 0 && <Text>게시물이 없습니다.</Text>}
-                        {podbbanglist?.map(m => (
+                        {podbbangList?.map(m => (
                             <PodbbangBox 
                                 onPress={() => navigation.navigate('PodbbangDetail', m)}
                                 key={m.uid}
