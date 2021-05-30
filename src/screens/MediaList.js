@@ -12,9 +12,6 @@ export default () => {
 
     return (
         <View style={Component.Container}>
-            <View style={Style.Header}>
-                <Text style={Component.Title}>영상목록</Text>
-            </View>
             <View style={Style.Body}>
                 <PTRView
                     style={Component.List}

@@ -24,9 +24,6 @@ export default ({navigation}) => {
     }
     return (
         <View style={Style.Container}>
-            <View style={Style.Header}>
-                <Text style={Component.Title}>공지목록</Text>
-            </View>
             <View style={Style.Body}>
                 <PTRView
                     style={Component.List}
