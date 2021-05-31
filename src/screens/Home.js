@@ -2,18 +2,65 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Linking, Image, Alert } from 'react-native';
 import YoutubePlayer from '../components/YoutubePlayer';
 import { SliderBox } from 'react-native-image-slider-box';
-import { url } from '../../env';
+import { baseUri, url } from '../../env';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 export default ({ navigation }) => {
-  const cdnlink = 'https://m.podbbang.com/channels/1779381';
+  /*const cdnlink = 'https://m.podbbang.com/channels/1779381';
   const youtube = "https://www.youtube.com/embed/qGmJxG9Z4Bo";
-
-  const imagelist = [
+*/
+  const imageList = [
     "https://source.unsplash.com/1024x768/?nature",
     "https://source.unsplash.com/1024x768/?water",
     "https://source.unsplash.com/1024x768/?girl",
     "https://source.unsplash.com/1024x768/?tree",
   ];
+  let cdnlink = "";
+  let youtube = "";
+  const [isLoading, setIsLoading] = useState(true);
+  let buffer;
+
+  const getHeader = async() => {
+    await axios.get(`${baseUri.outter_net}/api/v1/link/youtube`)
+    .then(res => {
+      buffer = res.data;
+      youtube = res.data[0].link;
+      res.data.map(media => {
+        if(media.isPrimary === true){
+          youtube = media.link;
+        }
+      })
+      console.log('Youtube');
+    })
+    .catch(e => {
+      console.log(e);
+    });
+    console.log(youtube);
+    await axios.get(`${baseUri.outter_net}/api/v1/link/podbbang`)
+    .then(res => {
+      buffer = res.data;
+      res.data.map(media => {
+        if(media.isPrimary === true){
+          cdnlink = media.link;
+        }
+      })
+      console.log('Podbbang');
+    })
+    .catch(e => {
+      console.log(e)
+    });
+    if(cdnlink === ""){
+      cdnlink = buffer[0].link;
+    }
+    console.log(cdnlink);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    getHeader();
+  });
+
   const LinkTo = (link) => {
     try {
       Linking.canOpenURL(link)
@@ -28,12 +75,13 @@ export default ({ navigation }) => {
       Alert.alert('유효하지 않은 링크입니다.');
     }
   }
-
+  if(isLoading){
+    return <Text>Loading..</Text>;
+  } 
   return (
     <View>
       <View style={Style.Header}>
-        <Text style={FontStyle.Title}>고래산마을</Text>
-        <Image style={Component.Img} source={require('../../assets/whale.png')} />
+        <Image source={require('../../assets/header.png')} />
       </View>
       <View style={Style.Body}>
         <YoutubePlayer link={youtube} />
@@ -58,7 +106,7 @@ export default ({ navigation }) => {
             autoplay={true}  //자동 슬라이드 넘김
             disableOnPress={true}
             circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
-            images={imagelist} // 이미지 주소 리스트 
+            images={imageList} // 이미지 주소 리스트 
             dotColor="#000000" // 아래 점 투명으로 안보이게 가림
             inactiveDotColor="#000000"
             onCurrentImagePressed={() => console.log('notice')}
@@ -105,11 +153,10 @@ const FontStyle = StyleSheet.create({
 const Style = StyleSheet.create({
   Header: {
     flexDirection: 'row',
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ffffff',
     width: '100%',
     height: '10%',
     justifyContent: 'center',
-    paddingBottom: 10,
     alignItems: 'flex-end',
     elevation: 5,
   },
@@ -153,3 +200,7 @@ const Component = StyleSheet.create({
     height: 50,
   }
 });
+/*
+<Text style={FontStyle.Title}>고래산마을</Text>
+        <Image style={Component.Img} source={require('../../assets/whale.png')} />
+        */
