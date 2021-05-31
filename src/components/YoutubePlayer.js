@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { WebView } from 'react-native-webview';
 
 export default ({ link }) => {
     console.log("INSIDE PLAYER : " + link);
+    if(link === ""){
+      return <View style={Component.Video}><Text>No Video</Text></View>
+    }
     return (
         <View style={Component.Video}>
           <WebView

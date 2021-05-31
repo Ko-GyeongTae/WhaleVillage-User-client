@@ -16,50 +16,45 @@ export default ({ navigation }) => {
     "https://source.unsplash.com/1024x768/?girl",
     "https://source.unsplash.com/1024x768/?tree",
   ];
+
   let cdnlink = "";
-  let youtube = "";
+  const [youtube, setYoutube] = useState();
   const [isLoading, setIsLoading] = useState(true);
   let buffer;
-
+  
   const getHeader = async() => {
     await axios.get(`${baseUri.outter_net}/api/v1/link/youtube`)
     .then(res => {
       buffer = res.data;
-      youtube = res.data[0].link;
+      setYoutube(buffer[0].link);
       res.data.map(media => {
         if(media.isPrimary === true){
-          youtube = media.link;
+          setYoutube(media.link);
         }
       })
-      console.log('Youtube');
     })
     .catch(e => {
       console.log(e);
     });
-    console.log(youtube);
     await axios.get(`${baseUri.outter_net}/api/v1/link/podbbang`)
     .then(res => {
       buffer = res.data;
+      cdnlink = buffer[0].link;
       res.data.map(media => {
         if(media.isPrimary === true){
           cdnlink = media.link;
         }
       })
-      console.log('Podbbang');
     })
     .catch(e => {
       console.log(e)
     });
-    if(cdnlink === ""){
-      cdnlink = buffer[0].link;
-    }
-    console.log(cdnlink);
     setIsLoading(false);
   }
 
   useEffect(() => {
     getHeader();
-  });
+  }, []);
 
   const LinkTo = (link) => {
     try {

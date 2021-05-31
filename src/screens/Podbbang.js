@@ -5,9 +5,7 @@ import { useState } from "react";
 import { StyleSheet, ScrollView, Text, View } from "react-native";
 import PTRView from "react-native-pull-to-refresh";
 import { baseUri } from "../../env";
-import NoticeBox from "../components/NoticeBox";
 import PodbbangBox from "../components/PodbbangBox";
-import PodbbangPlayer from "../components/PodbbangPlayer";
 
 export default ({navigation}) => {
     const [podbbangList, setPodbbangList] = useState([]);
