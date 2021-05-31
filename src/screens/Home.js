@@ -7,14 +7,13 @@ import axios from 'axios';
 import { useEffect } from 'react';
 
 export default ({ navigation }) => {
-  /*const cdnlink = 'https://m.podbbang.com/channels/1779381';
-  const youtube = "https://www.youtube.com/embed/qGmJxG9Z4Bo";
-*/
   const imageList = [
-    "https://source.unsplash.com/1024x768/?nature",
-    "https://source.unsplash.com/1024x768/?water",
-    "https://source.unsplash.com/1024x768/?girl",
-    "https://source.unsplash.com/1024x768/?tree",
+    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/cap-2019-11-13-12-14-54-182_orig.jpg",
+    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/small-19_orig.jpg",
+    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/small-10_orig.jpg",
+    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/small-23_orig.jpg",
+    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/small-59_orig.jpg"
+
   ];
 
   let cdnlink = "";
@@ -195,7 +194,3 @@ const Component = StyleSheet.create({
     height: 50,
   }
 });
-/*
-<Text style={FontStyle.Title}>고래산마을</Text>
-        <Image style={Component.Img} source={require('../../assets/whale.png')} />
-        */
