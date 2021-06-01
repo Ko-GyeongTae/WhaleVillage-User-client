@@ -23,9 +23,6 @@ export default ({ navigation, route }) => {
 
     useEffect(() => {
         getDetail();
-        navigation.setOptions({
-            headerTitle: `${post.title}`
-        });
     }, []);
     if (isLoading) {
         return <Text>Loading...</Text>

@@ -109,14 +109,14 @@ export default ({ navigation }) => {
         </View>
       </View>
       <View style={Style.Footer}>
-        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => LinkTo(url.inquiry)}>
-          <Text style={FontStyle.Redirect}>문의</Text>
+        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Question")}>
+          <Text style={FontStyle.Redirect}>문의사항</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => LinkTo(url.introduce)}>
           <Text style={FontStyle.Redirect}>마을소개</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => LinkTo(url.product)}>
-          <Text style={FontStyle.Redirect}>특산품</Text>
+        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => LinkTo(url.challenge)}>
+          <Text style={FontStyle.Redirect}>마을체험</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -137,7 +137,7 @@ const FontStyle = StyleSheet.create({
     paddingBottom: 5,
   },
   Redirect: {
-    fontSize: 40,
+    fontSize: 30,
   },
   Notice: {
     fontSize: 30,
