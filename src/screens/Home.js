@@ -16,7 +16,7 @@ export default ({ navigation }) => {
 
   ];
 
-  let cdnlink = "";
+  const [cdn, setCdn] = useState();
   const [youtube, setYoutube] = useState();
   const [isLoading, setIsLoading] = useState(true);
   let buffer;
@@ -24,8 +24,7 @@ export default ({ navigation }) => {
   const getHeader = async() => {
     await axios.get(`${baseUri.outter_net}/api/v1/link/youtube`)
     .then(res => {
-      buffer = res.data;
-      setYoutube(buffer[0].link);
+      setYoutube(res.data[0].link);
       res.data.map(media => {
         if(media.isPrimary === true){
           setYoutube(media.link);
@@ -37,13 +36,8 @@ export default ({ navigation }) => {
     });
     await axios.get(`${baseUri.outter_net}/api/v1/link/podbbang`)
     .then(res => {
-      buffer = res.data;
-      cdnlink = buffer[0].link;
-      res.data.map(media => {
-        if(media.isPrimary === true){
-          cdnlink = media.link;
-        }
-      })
+      setCdn(res.data[0].link);
+      console.log(cdn);
     })
     .catch(e => {
       console.log(e)
@@ -82,7 +76,7 @@ export default ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('MediaList')}>
           <Text style={FontStyle.More}>더보기</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => LinkTo(cdnlink)}>
+        <TouchableOpacity onPress={() => LinkTo(cdn)}>
           <View style={Component.cdn}>
             <Text style={FontStyle.CDN}>팟빵 링크</Text>
           </View>

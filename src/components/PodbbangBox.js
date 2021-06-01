@@ -38,7 +38,7 @@ export default (props) => {
   return (
     <TouchableOpacity style={Component.Component} onPress={() => props.onPress()}>
       <View style={Component.Header}>
-        <Text style={FontStyle.Title}>{props.title}</Text>
+        <Text style={FontStyle.Title}>{props.isPrimary ? `✅ ${props.title}` : props.title}</Text>
       </View>
     </TouchableOpacity>
   );

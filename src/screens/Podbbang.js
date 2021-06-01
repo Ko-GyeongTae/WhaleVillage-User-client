@@ -49,6 +49,7 @@ export default ({navigation}) => {
                                 onPress={() => navigation.navigate('PodbbangDetail', m)}
                                 key={m.uid}
                                 title={m.title}
+                                isPrimary={m.isPrimary}
                             />
                         ))}
                     </ScrollView>
