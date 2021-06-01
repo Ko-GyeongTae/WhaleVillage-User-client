@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 export default () => (
   <NavigationContainer>
     <Stack.Navigator initialRouteName="Home" >
-      <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
+      <Stack.Screen name="Home" component={Home} options={{headerTitle: '홈', headerShown: false}}/>
       <Stack.Screen name="MediaList" component={MediaList} options={{headerTitle: '영상목록'}}/>
       <Stack.Screen name="NoticeList" component={NoticeList} options={{headerTitle: '공지목록'}}/>
       <Stack.Screen name="NoticeDetail" component={NoticeDetail} options={{headerTitle: '공지'}}/>
