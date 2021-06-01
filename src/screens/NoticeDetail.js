@@ -2,11 +2,10 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
-import { SliderBox } from "react-native-image-slider-box";
+import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { baseUri } from "../../env";
 
-export default ({ route }) => {
+export default ({ navigation, route }) => {
     const [post, setPost] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const date = new Date(post.date);
@@ -21,9 +20,12 @@ export default ({ route }) => {
             });
         setIsLoading(false);
     }
-   
+
     useEffect(() => {
         getDetail();
+        navigation.setOptions({
+            headerTitle: `${post.title}`
+        });
     }, []);
     if (isLoading) {
         return <Text>Loading...</Text>
@@ -31,15 +33,22 @@ export default ({ route }) => {
     return (
         <View style={Style.Container}>
             <View style={Style.TextBox}>
-                <Text style={{ padding: 10 }}>{post.contents}</Text>
+                <Text style={{ padding: 10, fontSize: 15 }}>{post.contents}</Text>
+            </View>
+            <ScrollView
+                showsHorizontalScrollIndicator={true}
+                onMomentumScrollEnd={
+                    () => { console.log('Scrolling is End') }
+                }
+            >
+
                 <View>
                     {!post.media && <Text>이미지가 없습니다.</Text>}
                     {post.media.map(m => {
-                        console.log(`${baseUri.outter_net}/api/v1/media/${m}`),
-                        <Image style={{width: 100, height: 100, backgroundColor: 'red'}} source={{ uri: `${baseUri.outter_net}/api/v1/media/${m}`}} />
+                        return <Image key={m} style={Style.ImageBox} source={{ uri: `${baseUri.outter_net}/api/v1/media/${m}` }} />
                     })}
                 </View>
-            </View>
+            </ScrollView>
         </View>
     );
 };
@@ -54,14 +63,15 @@ const Style = StyleSheet.create({
     },
     TextBox: {
         width: 340,
-        height: '80%',
+        height: '35%',
         marginTop: 30,
         borderRadius: 10,
         elevation: 10,
+        marginBottom: 20,
         backgroundColor: '#ffffff',
     },
     ImageBox: {
-        width: 100,
-        height: 100,
+        width: 300,
+        height: 300,
     }
 });
