@@ -47,6 +47,11 @@ export default ({ navigation }) => {
 
   useEffect(() => {
     getHeader();
+    return () => {
+      console.log('clean');
+      setCdn("");
+      setYoutube([]);
+    }
   }, []);
 
   const LinkTo = (link) => {
@@ -149,7 +154,7 @@ const Style = StyleSheet.create({
     elevation: 5,
   },
   Body: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#687DFB',
     width: '100%',
     height: '80%',
     alignItems: 'center',

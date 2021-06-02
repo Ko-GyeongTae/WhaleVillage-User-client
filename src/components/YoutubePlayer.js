@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 import { StyleSheet, Text, View } from 'react-native'
 import { WebView } from 'react-native-webview';
 
-export default ({ link }) => {
-    console.log("INSIDE PLAYER : " + link);
+export default memo(({ link }) => {
     if(link === ""){
       return <View style={Component.Video}><Text>No Video</Text></View>
     }
@@ -18,7 +17,7 @@ export default ({ link }) => {
           />
         </View>
     );
-}
+})
 
 const Component = StyleSheet.create({
     Video: { 
