@@ -55,6 +55,21 @@ export default memo(({ navigation }) => {
     }
   }, []);
 
+  const LinkTo = (link) => {
+    try {
+      Linking.canOpenURL(link)
+        .then(supported => {
+          if (supported) {
+            Linking.openURL(link);
+          } else {
+            console.log(`${link} is not correct!`);
+          }
+        });
+    } catch (e) {
+      Alert.alert('유효하지 않은 링크입니다.');
+    }
+  }
+
   if(isLoading){
     return <Text>Loading..</Text>;
   } 
