@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { memo } from 'react';
 
-export default () => {
-
+export default memo(() => {
     return(
         <View style={Style.Container}>
             <View style={Style.TextBox}>
@@ -21,12 +21,12 @@ export default () => {
             </View>
         </View>
     );
-}
+});
 
 const Style = StyleSheet.create({
     Container: {
         flex: 1,
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#687DFB',
         alignItems: 'center',
     },
     TextBox: {

@@ -17,8 +17,9 @@ export default memo(({route}) => {
 const Style = StyleSheet.create({
     Body: {
         width: '100%',
-        height: '90%',
+        height: '100%',
         alignItems: 'center',
+        backgroundColor: '#687DFB',
     },
 })
 
@@ -26,5 +27,6 @@ const Component = StyleSheet.create({
     Container: {
         flex: 1,
         height: '100%',
+        backgroundColor: '#687DFB',
     }
 })
