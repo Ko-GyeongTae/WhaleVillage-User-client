@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { memo } from 'react';
 import PodbbangPlayer from '../components/PodbbangPlayer';
 
-export default ({route}) => {
+export default memo(({route}) => {
     const param = route.params;
     return (
         <View style={Component.Container}>
@@ -11,7 +12,7 @@ export default ({route}) => {
             </View>
         </View>
     );
-}
+});
 
 const Style = StyleSheet.create({
     Body: {

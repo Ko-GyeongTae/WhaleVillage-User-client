@@ -41,13 +41,13 @@ const FontStyle = StyleSheet.create({
 export default (props) => {
   const date = new Date(props.date);
   return (
-    <TouchableOpacity style={Component.Component} onPress={() => props.onPress()}>
+    <View style={Component.Component}>
       <View style={Component.Header}>
         <Text style={FontStyle.Title}>{props.title}</Text>
       </View>
       <View style={Component.Bottom}>
         <Text style={FontStyle.Day}>{`${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}일 ${date.getHours() > 12 ? `오후 ${date.getHours() - 12}` : `오전 ${date.getHours()}`}시 ${date.getMinutes()}분 ${date.getSeconds()}초`}</Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };

@@ -43,6 +43,7 @@ export default () => {
                     removeClippedSubviews={true}
                     maxToRenderPerBatch={3}
                     disableVirtualization={false}
+                    legacyImplementation={true}
                     keyExtractor={item => item.uid.toString()}
                 />
             </View>

@@ -5,8 +5,9 @@ import { SliderBox } from 'react-native-image-slider-box';
 import { baseUri, url } from '../../env';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { memo } from 'react';
 
-export default ({ navigation }) => {
+export default memo(({ navigation }) => {
   const imageList = [
     "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/cap-2019-11-13-12-14-54-182_orig.jpg",
     "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/small-19_orig.jpg",
@@ -36,7 +37,7 @@ export default ({ navigation }) => {
     });
     await axios.get(`${baseUri.outter_net}/api/v1/link/podbbang`)
     .then(res => {
-      setCdn(res.data[0].link);
+      setCdn(res.data[0]);
       console.log(cdn);
     })
     .catch(e => {
@@ -54,20 +55,6 @@ export default ({ navigation }) => {
     }
   }, []);
 
-  const LinkTo = (link) => {
-    try {
-      Linking.canOpenURL(link)
-        .then(supported => {
-          if (supported) {
-            Linking.openURL(link);
-          } else {
-            console.log(`${link} is not correct!`);
-          }
-        });
-    } catch (e) {
-      Alert.alert('유효하지 않은 링크입니다.');
-    }
-  }
   if(isLoading){
     return <Text>Loading..</Text>;
   } 
@@ -81,7 +68,7 @@ export default ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('MediaList')}>
           <Text style={FontStyle.More}>더보기</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => LinkTo(cdn)}>
+        <TouchableOpacity onPress={() => navigation.navigate('PodbbangDetail', cdn)}>
           <View style={Component.cdn}>
             <Text style={FontStyle.CDN}>팟빵 링크</Text>
           </View>
@@ -120,7 +107,7 @@ export default ({ navigation }) => {
       </View>
     </View>
   );
-};
+});
 
 const FontStyle = StyleSheet.create({
   Title: {
