@@ -72,9 +72,9 @@ export default ({ navigation }) => {
   } 
   return (
     <View style={{alignItems: 'center'}}>
-      <View style={Style.Header}>
+      <TouchableOpacity style={Style.Header} onPress={() => getHeader()}>
         <Image style={Components.headimg} source={require('../../assets/whalevillage/main/header.png')} />
-      </View>
+      </TouchableOpacity>
       <View style={Style.Body}>
         <YoutubePlayer link={youtube} />
         <TouchableOpacity onPress={() => navigation.navigate('MediaList')}>
@@ -151,6 +151,7 @@ const Components = StyleSheet.create({
     width: 270,
     height: 55,
     marginBottom: 5,
+    position: 'absolute',
   },
   More: {
     marginTop: 5,
