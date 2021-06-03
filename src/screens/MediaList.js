@@ -1,8 +1,6 @@
 import React from "react";
-import { StyleSheet, ScrollView, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import YoutubePlayer from "../components/YoutubePlayer";
-import PTRView from "react-native-pull-to-refresh";
-import { List } from 'react-virtualized';
 import { useState } from "react";
 import axios from "axios";
 import { baseUri } from "../../env";
@@ -54,7 +52,7 @@ export default () => {
 const Style = StyleSheet.create({
     Body: {
         width: '100%',
-        height: '90%',
+        height: '100%',
         alignItems: 'center',
         backgroundColor: '#687DFB',
     },

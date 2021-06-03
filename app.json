@@ -4,9 +4,9 @@
     "slug": "WhaleVillage-Mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon2.png",
+    "icon": "./assets/whalevillage/app-icon.png",
     "splash": {
-      "image": "./assets/header.png",
+      "image": "",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,11 +17,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.busanpanda.WhaleVillageMobile"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon1.png",
+        "foregroundImage": "./assets/whalevillage/app-icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.busanpanda.WhaleVillageMobile"

@@ -1,15 +1,13 @@
 import axios from "axios";
 import React from "react";
-import { memo } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { baseUri } from "../../env";
 
-export default memo(({ navigation, route }) => {
+export default ({ route }) => {
     const [post, setPost] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    const date = new Date(post.date);
     const getDetail = async () => {
         await axios.get(`${baseUri.outter_net}/api/v1/post/${route.params.uid}`)
             .then(res => {
@@ -49,7 +47,7 @@ export default memo(({ navigation, route }) => {
             </ScrollView>
         </View>
     );
-});
+};
 
 const Style = StyleSheet.create({
     Container: {

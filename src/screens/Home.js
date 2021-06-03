@@ -7,20 +7,11 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { memo } from 'react';
 
-export default memo(({ navigation }) => {
-  const imageList = [
-    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/cap-2019-11-13-12-14-54-182_orig.jpg",
-    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/small-19_orig.jpg",
-    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/small-10_orig.jpg",
-    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/small-23_orig.jpg",
-    "https://goraesan.weebly.com/uploads/1/2/9/4/129486262/small-59_orig.jpg"
-
-  ];
-
+export default ({ navigation }) => {
+  const [imageList, setImageList] = useState([]);
   const [cdn, setCdn] = useState();
   const [youtube, setYoutube] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  let buffer;
   
   const getHeader = async() => {
     await axios.get(`${baseUri.outter_net}/api/v1/link/youtube`)
@@ -33,17 +24,28 @@ export default memo(({ navigation }) => {
       })
     })
     .catch(e => {
-      console.log(e);
+      Alert.alert("유튜브링크를 불러오는데 실패했습니다.")
     });
     await axios.get(`${baseUri.outter_net}/api/v1/link/podbbang`)
     .then(res => {
       setCdn(res.data[0]);
-      console.log(cdn);
     })
     .catch(e => {
-      console.log(e)
+      Alert.alert("팟빵링크를 불러오는데 실패했습니다.")
     });
-    setIsLoading(false);
+    await axios.get(`${baseUri.outter_net}/api/v1/thumbnail/new`)
+    .then(res => {
+      res.data.map(r => {
+        setImageList([...imageList, `${baseUri.outter_net}/api/v1/media/${r.media}`]);
+        console.log(imageList);
+        setIsLoading(false);
+      })
+    })
+    .catch(e => {
+      console.log(e);
+      Alert.alert("이미지를 불러오는데 실패했습니다.")
+      setIsLoading(false);
+    })
   }
 
   useEffect(() => {
@@ -76,7 +78,7 @@ export default memo(({ navigation }) => {
   return (
     <View>
       <View style={Style.Header}>
-        <Image source={require('../../assets/header.png')} />
+        <Image style={Component.headimg} source={require('../../assets/whalevillage/main/header.png')} />
       </View>
       <View style={Style.Body}>
         <YoutubePlayer link={youtube} />
@@ -91,7 +93,7 @@ export default memo(({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('Podbbang')}>
           <Text style={FontStyle.More}>더보기</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('NoticeList')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Notice')}>
           <View style={Component.notice}>
             <Text style={FontStyle.Notice}>공지사항</Text>
           </View>
@@ -122,7 +124,7 @@ export default memo(({ navigation }) => {
       </View>
     </View>
   );
-});
+};
 
 const FontStyle = StyleSheet.create({
   Title: {
@@ -193,5 +195,9 @@ const Component = StyleSheet.create({
   Img: {
     width: 90,
     height: 50,
+  },
+  headimg: {
+    width: 270,
+    height: 55,
   }
 });
