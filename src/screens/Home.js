@@ -11,6 +11,7 @@ export default ({ navigation }) => {
   const [cdn, setCdn] = useState();
   const [youtube, setYoutube] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [isMounted, setIsMounted] = useState(true);
   
   const getHeader = async() => {
     await axios.get(`${baseUri.outter_net}/api/v1/link/youtube`)
@@ -36,12 +37,14 @@ export default ({ navigation }) => {
     .then(res => {
       setImageList([]);
       res.data.map(r => {
-        if(r.media === "") {
+        if(r.media[0] === "") {
+          console.log('check', r);
           return;
+        }else{
+          console.log(r);
+          setImageList(oldList => [...oldList, `${baseUri.outter_net}/api/v1/media/${r.media[0]}`]);
+          console.log(imageList);
         }
-        console.log(r);
-        setImageList(oldList => [...oldList, `${baseUri.outter_net}/api/v1/media/${r.media.media}`]);
-        console.log(imageList);
       })
     })
     .catch(e => {
@@ -55,15 +58,20 @@ export default ({ navigation }) => {
 
   useEffect(() => {
     getHeader();
-    console.log('Rerender')
-  }, [isLoading]);
+    setImageList([]);
+    console.log('Rerender');
+    return () => {
+      setIsMounted(false);
+      console.log('unmount');
+    }
+  }, [isLoading, isMounted]);
 
   
   if(isLoading){
     return <Text>Loading..</Text>;
   } 
   return (
-    <View>
+    <View style={{alignItems: 'center'}}>
       <View style={Style.Header}>
         <Image style={Components.headimg} source={require('../../assets/whalevillage/main/header.png')} />
       </View>
@@ -113,6 +121,8 @@ const Style = StyleSheet.create({
   Header: {
     flexDirection: 'row',
     backgroundColor: '#687DFB',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
     height: '10%',
     elevation: 5,
@@ -120,17 +130,15 @@ const Style = StyleSheet.create({
   Body: {
     backgroundColor: '#ffffff',
     width: '100%',
-    height: '80%',
+    height: '82%',
     alignItems: 'center',
   },
   Footer: {
     flexDirection: 'row',
-    backgroundColor: 'red',
     justifyContent: 'center',
-    alignContent: 'center',
-    width: '100%',
-    height: '10%',
-    elevation: 5,
+    alignItems: 'flex-end',
+    width: '80%',
+    height: '8%',
   }
 });
 
@@ -159,7 +167,7 @@ const Components = StyleSheet.create({
     height: 34,
   },
   BottomButton: {
-    width: 125,
+    width: 120,
     height: 45,
   }
 });

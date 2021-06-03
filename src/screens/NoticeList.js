@@ -43,7 +43,7 @@ export default ({navigation}) => {
                     >
                         {noticeList.length === 0 && <Text style={{marginTop: 20}}>게시물이 없습니다.</Text>}
                         {noticeList?.map(notice => (
-                            <TouchableOpacity style={{width: 350, height: 80}} onPress={() => navigation.navigate("NoticeDetail", notice)}>
+                            <TouchableOpacity key={notice.uid.toString()} style={{width: 350, height: 80}} onPress={() => navigation.navigate("NoticeDetail", notice)}>
                                 <NoticeBox
                                     key={notice.uid.toString()}
                                     date={notice.date}
