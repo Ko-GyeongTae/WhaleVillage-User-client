@@ -137,7 +137,8 @@ const Style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-end',
-    width: '80%',
+    backgroundColor: '#ffffff',
+    width: '100%',
     height: '8%',
   }
 });
@@ -154,8 +155,8 @@ const Components = StyleSheet.create({
     position: 'absolute',
   },
   More: {
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: 8,
+    marginBottom: 8,
     width: 120,
     height: 28,
   },
