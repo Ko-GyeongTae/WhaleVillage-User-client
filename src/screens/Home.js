@@ -96,39 +96,18 @@ export default ({ navigation }) => {
       </View>
       <View style={Style.Footer}>
         <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Question")}>
-          <Text style={FontStyle.Redirect}>문의사항</Text>
+          <Image style={Components.BottomButton}source={require('../../assets/whalevillage/main/question.png')}/>
         </TouchableOpacity>
         <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Introduce")}>
-          <Text style={FontStyle.Redirect}>마을소개</Text>
+          <Image style={Components.BottomButton}source={require('../../assets/whalevillage/main/introduce.png')}/>
         </TouchableOpacity>
         <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Challenge")}>
-          <Text style={FontStyle.Redirect}>마을체험</Text>
+          <Image style={Components.BottomButton}source={require('../../assets/whalevillage/main/challenge.png')}/>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const FontStyle = StyleSheet.create({
-  Title: {
-    fontSize: 40,
-    fontWeight: 'bold',
-  },
-  CDN: {
-    fontSize: 30,
-  },
-  More: {
-    fontSize: 20,
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  Redirect: {
-    fontSize: 30,
-  },
-  Notice: {
-    fontSize: 30,
-  }
-});
 
 const Style = StyleSheet.create({
   Header: {
@@ -136,8 +115,6 @@ const Style = StyleSheet.create({
     backgroundColor: '#687DFB',
     width: '100%',
     height: '10%',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
     elevation: 5,
   },
   Body: {
@@ -148,7 +125,7 @@ const Style = StyleSheet.create({
   },
   Footer: {
     flexDirection: 'row',
-    backgroundColor: '#f9f9f9',
+    backgroundColor: 'red',
     justifyContent: 'center',
     alignContent: 'center',
     width: '100%',
@@ -180,5 +157,9 @@ const Components = StyleSheet.create({
   Notice: {
     width: 350,
     height: 34,
+  },
+  BottomButton: {
+    width: 125,
+    height: 45,
   }
 });

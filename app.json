@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/whalevillage/app-icon.png",
     "splash": {
-      "image": "",
+      "image": "./assets/whalevillage/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
