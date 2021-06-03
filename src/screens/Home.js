@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Linking, Image, Alert } from 'react-native';
 import YoutubePlayer from '../components/YoutubePlayer';
 import { SliderBox } from 'react-native-image-slider-box';
 import { baseUri, url } from '../../env';
 import axios from 'axios';
 import { useEffect } from 'react';
-import { memo } from 'react';
 
 export default ({ navigation }) => {
   const [imageList, setImageList] = useState([]);
@@ -35,15 +34,17 @@ export default ({ navigation }) => {
     });
     await axios.get(`${baseUri.outter_net}/api/v1/thumbnail/new`)
     .then(res => {
+      setImageList([]);
       res.data.map(r => {
-        setImageList([...imageList, `${baseUri.outter_net}/api/v1/media/${r.media}`]);
+        setImageList(oldList => [...oldList, `${baseUri.outter_net}/api/v1/media/${r.media}`]);
         console.log(imageList);
-        setIsLoading(false);
       })
     })
     .catch(e => {
       console.log(e);
       Alert.alert("이미지를 불러오는데 실패했습니다.")
+    })
+    .finally(() => {
       setIsLoading(false);
     })
   }
@@ -55,7 +56,7 @@ export default ({ navigation }) => {
       setCdn("");
       setYoutube([]);
     }
-  }, []);
+  }, [isLoading]);
 
   const LinkTo = (link) => {
     try {
@@ -78,25 +79,21 @@ export default ({ navigation }) => {
   return (
     <View>
       <View style={Style.Header}>
-        <Image style={Component.headimg} source={require('../../assets/whalevillage/main/header.png')} />
+        <Image style={Components.headimg} source={require('../../assets/whalevillage/main/header.png')} />
       </View>
       <View style={Style.Body}>
         <YoutubePlayer link={youtube} />
         <TouchableOpacity onPress={() => navigation.navigate('MediaList')}>
-          <Text style={FontStyle.More}>더보기</Text>
+          <Image style={Components.More} source={require('../../assets/whalevillage/main/more.png')}/>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('PodbbangDetail', cdn)}>
-          <View style={Component.cdn}>
-            <Text style={FontStyle.CDN}>팟빵 링크</Text>
-          </View>
+          <Image style={Components.podbbang} source={require('../../assets/whalevillage/main/podbbang.png')}/>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Podbbang')}>
-          <Text style={FontStyle.More}>더보기</Text>
+          <Image style={Components.More} source={require('../../assets/whalevillage/main/more.png')}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Notice')}>
-          <View style={Component.notice}>
-            <Text style={FontStyle.Notice}>공지사항</Text>
-          </View>
+        <TouchableOpacity onPress={() => navigation.navigate('NoticeList')}>
+          <Image style={Components.Notice} source={require('../../assets/whalevillage/main/noticeButton.png')}/>
         </TouchableOpacity>
         <View>
           <SliderBox
@@ -136,8 +133,8 @@ const FontStyle = StyleSheet.create({
   },
   More: {
     fontSize: 20,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   Redirect: {
     fontSize: 30,
@@ -150,7 +147,7 @@ const FontStyle = StyleSheet.create({
 const Style = StyleSheet.create({
   Header: {
     flexDirection: 'row',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#687DFB',
     width: '100%',
     height: '10%',
     justifyContent: 'center',
@@ -158,7 +155,7 @@ const Style = StyleSheet.create({
     elevation: 5,
   },
   Body: {
-    backgroundColor: '#687DFB',
+    backgroundColor: '#ffffff',
     width: '100%',
     height: '80%',
     alignItems: 'center',
@@ -174,24 +171,7 @@ const Style = StyleSheet.create({
   }
 });
 
-const Component = StyleSheet.create({
-  cdn: {
-    width: 350,
-    height: 40,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 5,
-  },
-  notice: {
-    width: 350,
-    height: 40,
-    marginTop: 10,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 5,
-  },
+const Components = StyleSheet.create({
   Img: {
     width: 90,
     height: 50,
@@ -199,5 +179,20 @@ const Component = StyleSheet.create({
   headimg: {
     width: 270,
     height: 55,
+    marginBottom: 5,
+  },
+  More: {
+    marginTop: 5,
+    marginBottom: 5,
+    width: 120,
+    height: 28,
+  },
+  podbbang: {
+    width: 350,
+    height: 130,
+  },
+  Notice: {
+    width: 350,
+    height: 34,
   }
 });

@@ -79,7 +79,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Alert, Text, View, StyleSheet, ScrollView } from "react-native";
+import { Alert, Text, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import PTRView from "react-native-pull-to-refresh";
 import { baseUri } from "../../env";
 import NoticeBox from "../components/NoticeBox";
@@ -120,14 +120,14 @@ export default ({navigation}) => {
                     >
                         {noticeList.length === 0 && <Text style={{marginTop: 20}}>게시물이 없습니다.</Text>}
                         {noticeList?.map(notice => (
-                            <NoticeBox
-                                key={notice.uid}
-                                date={notice.date}
-                                uid={notice.uid}
-                                title={notice.title}
-                                type={"update"}
-                                navigations={navigation}
-                            />
+                            <TouchableOpacity onPress={() => navigation.navigate("NoticeDetail", notice)}>
+                                <NoticeBox
+                                    key={notice.uid}
+                                    date={notice.date}
+                                    uid={notice.uid}
+                                    title={notice.title}
+                                />
+                            </TouchableOpacity>
                         ))}
                     </ScrollView>
                 </PTRView>

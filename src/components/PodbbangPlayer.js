@@ -6,14 +6,13 @@ export default ({ link }) => {
     console.log("INSIDE PLAYER : " + link);
     return (
         <View style={Component.Video}>
-          {/*
           <WebView
             javaScriptEnabled={true}
             useWebKit={true}
             domStorageEnabled={false}
             allowsInlineMediaPlayback={false}
             source={{ uri: link }}
-          />*/}
+          />
         </View>
     );
 }

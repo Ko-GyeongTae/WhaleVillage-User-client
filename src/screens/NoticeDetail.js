@@ -6,6 +6,7 @@ import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { baseUri } from "../../env";
 
 export default ({ route }) => {
+    console.log(route.params);
     const [post, setPost] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const getDetail = async () => {
@@ -37,7 +38,6 @@ export default ({ route }) => {
                     () => { console.log('Scrolling is End') }
                 }
             >
-
                 <View>
                     {!post.media && <Text>이미지가 없습니다.</Text>}
                     {post.media.map(m => {
