@@ -9,14 +9,14 @@ export default () => {
                 <Text style={FontStyle.Title}>고래산마을</Text>
                 <Text style={FontStyle.Address}>경상북도 영덕군 축산면 영축로 963</Text>
                 <Text style={FontStyle.Tel}>054-733-5558</Text>
-                {/*<WebView
+                <WebView
                     style={Style.WebView}
                     javaScriptEnabled={true}
                     useWebKit={true}
                     domStorageEnabled={false}
                     allowsInlineMediaPlayback={false}
                     source={{ uri: 'https://m.map.naver.com/search2/search.naver?query=%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84%20%EC%98%81%EB%8D%95%EA%B5%B0%20%EC%B6%95%EC%82%B0%EB%A9%B4%20%EC%98%81%EC%B6%95%EB%A1%9C%20963&siteLocation=&queryRank=&type=#/map' }}
-                />*/}
+                />
             </View>
         </View>
     );

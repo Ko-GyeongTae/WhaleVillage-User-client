@@ -7,7 +7,9 @@ import NoticeList from '../screens/NoticeList';
 import NoticeDetail from '../screens/NoticeDetail';
 import Podbbang from '../screens/Podbbang';
 import PodbbangDetail from "../screens/PodbbangDetail";
-import Question from "../screens/Question.js";
+import Question from "../screens/Question";
+import Challenge from "../screens/Challenge";
+import introduce from "../screens/Introduce";
 const Stack = createStackNavigator();
 
 export default () => (
@@ -20,6 +22,8 @@ export default () => (
       <Stack.Screen name="Podbbang" component={Podbbang} options={{ headerTitle: '팟빵목록' }} />
       <Stack.Screen name="PodbbangDetail" component={PodbbangDetail} options={{ headerTitle: '팟빵' }} />
       <Stack.Screen name="Question" component={Question} option={{ headerTitle: '문의' }} />
+      <Stack.Screen name="Introduce" component={introduce} option={{ headerTitle: '마을소개' }} />
+      <Stack.Screen name="Challenge" component={Challenge} option={{ headerTitle: '마을체험' }} />
     </Stack.Navigator>
   </NavigationContainer>
 );

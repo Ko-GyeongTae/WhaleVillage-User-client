@@ -36,7 +36,11 @@ export default ({ navigation }) => {
     .then(res => {
       setImageList([]);
       res.data.map(r => {
-        setImageList(oldList => [...oldList, `${baseUri.outter_net}/api/v1/media/${r.media}`]);
+        if(r.media === "") {
+          return;
+        }
+        console.log(r);
+        setImageList(oldList => [...oldList, `${baseUri.outter_net}/api/v1/media/${r.media.media}`]);
         console.log(imageList);
       })
     })
@@ -51,28 +55,10 @@ export default ({ navigation }) => {
 
   useEffect(() => {
     getHeader();
-    return () => {
-      console.log('clean');
-      setCdn("");
-      setYoutube([]);
-    }
+    console.log('Rerender')
   }, [isLoading]);
 
-  const LinkTo = (link) => {
-    try {
-      Linking.canOpenURL(link)
-        .then(supported => {
-          if (supported) {
-            Linking.openURL(link);
-          } else {
-            console.log(`${link} is not correct!`);
-          }
-        });
-    } catch (e) {
-      Alert.alert('유효하지 않은 링크입니다.');
-    }
-  }
-
+  
   if(isLoading){
     return <Text>Loading..</Text>;
   } 
@@ -112,10 +98,10 @@ export default ({ navigation }) => {
         <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Question")}>
           <Text style={FontStyle.Redirect}>문의사항</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => LinkTo(url.introduce)}>
+        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Introduce")}>
           <Text style={FontStyle.Redirect}>마을소개</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => LinkTo(url.challenge)}>
+        <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Challenge")}>
           <Text style={FontStyle.Redirect}>마을체험</Text>
         </TouchableOpacity>
       </View>
