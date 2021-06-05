@@ -12,6 +12,7 @@ export default ({ navigation }) => {
   const [youtube, setYoutube] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(true);
+  const [postList, setPostList] = useState([]);
   
   const getHeader = async() => {
     await axios.get(`${baseUri.outter_net}/api/v1/link/youtube`)
@@ -43,6 +44,7 @@ export default ({ navigation }) => {
         }else{
           console.log(r);
           setImageList(oldList => [...oldList, `${baseUri.outter_net}/api/v1/media/${r.media[0]}`]);
+          setPostList(oldList => [...oldList, r]);
           console.log(imageList);
         }
       })
@@ -92,12 +94,12 @@ export default ({ navigation }) => {
         <View>
           <SliderBox
             autoplay={true}  //자동 슬라이드 넘김
-            disableOnPress={true}
+            disableOnPress={false}
             circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
             images={imageList} // 이미지 주소 리스트 
             dotColor="#000000" // 아래 점 투명으로 안보이게 가림
             inactiveDotColor="#000000"
-            onCurrentImagePressed={() => console.log('notice')}
+            onCurrentImagePressed={(index) => navigation.navigate("NoticeDetail", postList[index])}
             ImageComponentStyle={{ width: 350, height: 207 }} // 이미지 Style 적용
           />
         </View>
