@@ -19,11 +19,11 @@ export default () => (
       <Stack.Screen name="MediaList" component={MediaList} options={{ headerTitle: '영상목록' }} />
       <Stack.Screen name="NoticeList" component={NoticeList} options={{ headerTitle: '공지목록' }} />
       <Stack.Screen name="NoticeDetail" component={NoticeDetail} options={{ headerTitle: '공지' }} />
-      <Stack.Screen name="Podbbang" component={Podbbang} options={{ headerTitle: '팟빵목록' }} />
-      <Stack.Screen name="PodbbangDetail" component={PodbbangDetail} options={{ headerTitle: '팟빵' }} />
-      <Stack.Screen name="Question" component={Question} option={{ headerTitle: '문의' }} />
-      <Stack.Screen name="Introduce" component={introduce} option={{ headerTitle: '마을소개' }} />
-      <Stack.Screen name="Challenge" component={Challenge} option={{ headerTitle: '마을체험' }} />
+      <Stack.Screen name="Podbbang" component={Podbbang} options={{ headerTitle: '라디오목록' }} />
+      <Stack.Screen name="PodbbangDetail" component={PodbbangDetail} options={{ headerTitle: '고래산마을 들리는 라디오' }} />
+      <Stack.Screen name="Question" component={Question} options={{ headerTitle: '문의사항' }} />
+      <Stack.Screen name="Introduce" component={introduce} options={{ headerTitle: '마을소개' }} />
+      <Stack.Screen name="Challenge" component={Challenge} options={{ headerTitle: '마을체험' }} />
     </Stack.Navigator>
   </NavigationContainer>
 );

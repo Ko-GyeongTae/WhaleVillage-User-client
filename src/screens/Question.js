@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-export default () => {
-    return(
+export default ({ navigation }) => {
+    return (
         <View style={Style.Container}>
             <View style={Style.TextBox}>
                 <Text style={FontStyle.Title}>고래산마을</Text>
@@ -45,18 +45,18 @@ const Style = StyleSheet.create({
 })
 
 const FontStyle = StyleSheet.create({
-    Title:{
+    Title: {
         fontSize: 40,
         paddingTop: 20,
         paddingLeft: 20,
         fontWeight: '300',
     },
-    Address:{
+    Address: {
         fontSize: 15,
         paddingTop: 25,
         paddingLeft: 20,
     },
-    Tel:{
+    Tel: {
         fontSize: 20,
         paddingTop: 5,
         paddingLeft: 20,
