@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Linking, Image, Alert } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Linking, Image, Alert, ScrollView } from 'react-native';
 import YoutubePlayer from '../components/YoutubePlayer';
 import { SliderBox } from 'react-native-image-slider-box';
 import { baseUri, url } from '../../env';
@@ -13,49 +13,49 @@ export default ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(true);
   const [postList, setPostList] = useState([]);
-  
-  const getHeader = async() => {
+
+  const getHeader = async () => {
     await axios.get(`${baseUri.outter_net}/api/v1/link/youtube`)
-    .then(res => {
-      setYoutube(res.data[0].link);
-      res.data.map(media => {
-        if(media.isPrimary === true){
-          setYoutube(media.link);
-        }
+      .then(res => {
+        setYoutube(res.data[0].link);
+        res.data.map(media => {
+          if (media.isPrimary === true) {
+            setYoutube(media.link);
+          }
+        })
       })
-    })
-    .catch(e => {
-      Alert.alert("유튜브링크를 불러오는데 실패했습니다.")
-    });
+      .catch(e => {
+        Alert.alert("유튜브링크를 불러오는데 실패했습니다.")
+      });
     await axios.get(`${baseUri.outter_net}/api/v1/link/podbbang`)
-    .then(res => {
-      setCdn(res.data[0]);
-    })
-    .catch(e => {
-      Alert.alert("팟빵링크를 불러오는데 실패했습니다.")
-    });
-    await axios.get(`${baseUri.outter_net}/api/v1/thumbnail/new`)
-    .then(res => {
-      setImageList([]);
-      res.data.map(r => {
-        if(r.media[0] === "") {
-          console.log('check', r);
-          return;
-        }else{
-          console.log(r);
-          setImageList(oldList => [...oldList, `${baseUri.outter_net}/api/v1/media/${r.media[0]}`]);
-          setPostList(oldList => [...oldList, r]);
-          console.log(imageList);
-        }
+      .then(res => {
+        setCdn(res.data[0]);
       })
-    })
-    .catch(e => {
-      console.log(e);
-      Alert.alert("이미지를 불러오는데 실패했습니다.")
-    })
-    .finally(() => {
-      setIsLoading(false);
-    })
+      .catch(e => {
+        Alert.alert("팟빵링크를 불러오는데 실패했습니다.")
+      });
+    await axios.get(`${baseUri.outter_net}/api/v1/thumbnail/new`)
+      .then(res => {
+        setImageList([]);
+        res.data.map(r => {
+          if (r.media[0] === "") {
+            console.log('check', r);
+            return;
+          } else {
+            console.log(r);
+            setImageList(oldList => [...oldList, r.media[0]]);
+            setPostList(oldList => [...oldList, r]);
+            console.log(imageList);
+          }
+        })
+      })
+      .catch(e => {
+        console.log(e);
+        Alert.alert("이미지를 불러오는데 실패했습니다.")
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   useEffect(() => {
@@ -68,51 +68,53 @@ export default ({ navigation }) => {
     }
   }, [isLoading, isMounted]);
 
-  
-  if(isLoading){
+
+  if (isLoading) {
     return <Text>Loading..</Text>;
-  } 
+  }
   return (
-    <View style={{alignItems: 'center'}}>
+    <View style={{ alignItems: 'center' }}>
       <TouchableOpacity style={Style.Header} onPress={() => getHeader()}>
         <Image style={Components.headimg} source={require('../../assets/whalevillage/main/header.png')} />
       </TouchableOpacity>
-      <View style={Style.Body}>
-        <YoutubePlayer link={youtube} />
-        <TouchableOpacity onPress={() => navigation.navigate('MediaList')}>
-          <Image style={Components.More} source={require('../../assets/whalevillage/main/more.png')}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('PodbbangDetail', cdn)}>
-          <Image style={Components.podbbang} source={require('../../assets/whalevillage/main/podbbang.png')}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Podbbang')}>
-          <Image style={Components.More} source={require('../../assets/whalevillage/main/more.png')}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('NoticeList')}>
-          <Image style={Components.Notice} source={require('../../assets/whalevillage/main/noticeButton.png')}/>
-        </TouchableOpacity>
-        <View>
-          <SliderBox
-            autoplay={true}  //자동 슬라이드 넘김
-            disableOnPress={false}
-            circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
-            images={imageList} // 이미지 주소 리스트 
-            dotColor="#000000" // 아래 점 투명으로 안보이게 가림
-            inactiveDotColor="#000000"
-            onCurrentImagePressed={(index) => navigation.navigate("NoticeDetail", postList[index])}
-            ImageComponentStyle={{ width: 350, height: 207 }} // 이미지 Style 적용
-          />
+      <ScrollView style={Style.Body}>
+        <View style={{ width: '100%', alignItems: 'center'}}>
+          <YoutubePlayer link={youtube} />
+          <TouchableOpacity onPress={() => navigation.navigate('MediaList')}>
+            <Image style={Components.More} source={require('../../assets/whalevillage/main/more.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('PodbbangDetail', cdn)}>
+            <Image style={Components.podbbang} source={require('../../assets/whalevillage/main/podbbang.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Podbbang')}>
+            <Image style={Components.More} source={require('../../assets/whalevillage/main/more.png')} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('NoticeList')}>
+            <Image style={Components.Notice} source={require('../../assets/whalevillage/main/noticeButton.png')} />
+          </TouchableOpacity>
+          <View>
+            <SliderBox
+              autoplay={true}  //자동 슬라이드 넘김
+              disableOnPress={false}
+              circleLoop={true} //맨끝 슬라이드에서 다시 첫슬라이드로
+              images={imageList} // 이미지 주소 리스트 
+              dotColor="#000000" // 아래 점 투명으로 안보이게 가림
+              inactiveDotColor="#000000"
+              onCurrentImagePressed={(index) => navigation.navigate("NoticeDetail", postList[index])}
+              ImageComponentStyle={{ width: 350, height: 280 }} // 이미지 Style 적용
+            />
+          </View>
         </View>
-      </View>
+      </ScrollView>
       <View style={Style.Footer}>
         <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Question")}>
-          <Image style={Components.BottomButton}source={require('../../assets/whalevillage/main/question.png')}/>
+          <Image style={Components.BottomButton} source={require('../../assets/whalevillage/main/question.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Introduce")}>
-          <Image style={Components.BottomButton}source={require('../../assets/whalevillage/main/introduce.png')}/>
+          <Image style={Components.BottomButton} source={require('../../assets/whalevillage/main/introduce.png')} />
         </TouchableOpacity>
         <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => navigation.navigate("Challenge")}>
-          <Image style={Components.BottomButton}source={require('../../assets/whalevillage/main/challenge.png')}/>
+          <Image style={Components.BottomButton} source={require('../../assets/whalevillage/main/challenge.png')} />
         </TouchableOpacity>
       </View>
     </View>
@@ -133,7 +135,6 @@ const Style = StyleSheet.create({
     backgroundColor: '#ffffff',
     width: '100%',
     height: '82%',
-    alignItems: 'center',
   },
   Footer: {
     flexDirection: 'row',

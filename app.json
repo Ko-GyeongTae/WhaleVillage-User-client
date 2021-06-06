@@ -17,15 +17,16 @@
       "**/*"
     ],
     "ios": {
+      "buildNumber": "1.0.0",
       "supportsTablet": true,
-      "bundleIdentifier": "com.busanpanda.WhaleVillageMobile"
+      "bundleIdentifier": "com.busanpanda.WhaleVillageUser"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/whalevillage/app-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.busanpanda.WhaleVillageMobile"
+      "package": "com.busanpanda.WhaleVillageUser"
     },
     "web": {
       "favicon": "./assets/favicon.png"
