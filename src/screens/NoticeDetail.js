@@ -60,7 +60,7 @@ export default ({ route }) => {
                             return (
                                 <View style={Style.Download}>
                                     <TouchableOpacity key={m} onPress={() => OpneLink(m)}>
-                                        <Text style={{fontSize: 20}}>동영상 받으러 가기</Text>
+                                        <Text key={m} style={{fontSize: 20}}>동영상 받으러 가기</Text>
                                     </TouchableOpacity>
                                 </View>
                             )
