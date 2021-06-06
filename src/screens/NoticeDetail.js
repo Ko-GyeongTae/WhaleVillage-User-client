@@ -53,7 +53,7 @@ export default ({ route }) => {
                 <View>
                     {!post.media && <Text>이미지가 없습니다.</Text>}
                     {post.media.map(m => {
-                        let format = m.split('.')[1]
+                        let format = m.split('photo.')[1]
                         if(format === 'png' || format === 'jpg' || format === 'bmp' || format === 'gif'){
                             return <Image key={m} style={Style.ImageBox} source={{ uri: m }} />
                         } else {
