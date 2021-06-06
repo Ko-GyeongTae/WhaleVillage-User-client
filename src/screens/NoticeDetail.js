@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
+import { Text, View, StyleSheet, Image, ScrollView, Linking, TouchableOpacity } from "react-native";
 import { baseUri } from "../../env";
 
 export default ({ route }) => {
@@ -20,6 +20,18 @@ export default ({ route }) => {
             });
         setIsLoading(false);
     }
+
+    const OpneLink = (m) => {
+        console.log(m);
+        Linking.canOpenURL(m)
+        .then(supported => {
+          if (supported) {
+            Linking.openURL(m);
+          } else {
+            console.log("Don't know how to open URI: " + m);
+          }
+        }
+        )};
 
     useEffect(() => {
         getDetail();
@@ -41,7 +53,18 @@ export default ({ route }) => {
                 <View>
                     {!post.media && <Text>이미지가 없습니다.</Text>}
                     {post.media.map(m => {
-                        return <Image key={m} style={Style.ImageBox} source={{ uri: `${baseUri.outter_net}/api/v1/media/${m}` }} />
+                        let format = m.split('.')[1]
+                        if(format === 'png' || format === 'jpg' || format === 'bmp' || format === 'gif'){
+                            return <Image key={m} style={Style.ImageBox} source={{ uri: m }} />
+                        } else {
+                            return (
+                                <View style={Style.Download}>
+                                    <TouchableOpacity key={m} onPress={() => OpneLink(m)}>
+                                        <Text style={{fontSize: 20}}>동영상 받으러 가기</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        }
                     })}
                 </View>
             </ScrollView>
@@ -62,12 +85,23 @@ const Style = StyleSheet.create({
         height: '35%',
         marginTop: 30,
         borderRadius: 10,
-        elevation: 10,
+        elevation: 3,
         marginBottom: 20,
         backgroundColor: '#ffffff',
     },
     ImageBox: {
-        width: 300,
-        height: 300,
+        width: 340,
+        height: 255,
+        marginBottom: 20,
+        borderRadius: 10,
+    },
+    Download: {
+        width: 340,
+        height: 60,
+        marginBottom: 20,
+        borderRadius: 10,
+        backgroundColor: '#ffffff',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });
