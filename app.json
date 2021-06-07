@@ -2,7 +2,7 @@
   "expo": {
     "name": "고래산마을",
     "slug": "WhaleVillage-Mobile",
-    "version": "1.0.1",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/whalevillage/app-icon.png",
     "splash": {
@@ -18,7 +18,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.busanpanda.WhaleVillageUser"
+      "bundleIdentifier": "com.busanpanda.WhaleVillageMobile"
     },
     "android": {
       "adaptiveIcon": {
