@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Text, View, StyleSheet, Image, ScrollView, Linking, TouchableOpacity } from "react-native";
 import { baseUri } from "../../env";
 
-export default ({ route }) => {
+export default ({ navigation, route }) => {
     console.log(route.params);
     const [post, setPost] = useState("");
     const [isLoading, setIsLoading] = useState(true);
@@ -41,9 +41,12 @@ export default ({ route }) => {
     }
     return (
         <View style={Style.Container}>
-            <View style={Style.TextBox}>
+            <TouchableOpacity style={Style.TextBox} onPress={() => navigation.navigate("ContentDetail", post)}>
                 <Text style={{ padding: 10, fontSize: 15 }}>{post.contents}</Text>
-            </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={Style.Button} onPress={() => navigation.navigate("ContentDetail", post)}>
+                <Text style={{ fontSize: 25, color: 'white' }}>더보기</Text>
+            </TouchableOpacity>
             <ScrollView
                 showsHorizontalScrollIndicator={true}
                 onMomentumScrollEnd={
@@ -103,5 +106,15 @@ const Style = StyleSheet.create({
         backgroundColor: '#ffffff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    Button: {
+        width: 340,
+        height: 40,
+        backgroundColor: '#6c7cf2',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        elevation: 3,
+        marginBottom: 20,
     }
 });
