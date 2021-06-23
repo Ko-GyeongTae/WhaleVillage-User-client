@@ -2,7 +2,7 @@
   "expo": {
     "name": "고래산마을",
     "slug": "WhaleVillage-Mobile",
-    "version": "1.0.2",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/whalevillage/app-icon.png",
     "splash": {
@@ -22,7 +22,7 @@
       "bundleIdentifier": "com.busanpanda.WhaleVillageMobile"
     },
     "android": {
-      "versionCode": 4,
+      "versionCode": 5,
       "adaptiveIcon": {
         "foregroundImage": "./assets/whalevillage/app-icon.png",
         "backgroundColor": "#FFFFFF"
