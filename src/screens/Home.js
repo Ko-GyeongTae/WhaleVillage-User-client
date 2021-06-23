@@ -125,16 +125,16 @@ const Style = StyleSheet.create({
   Header: {
     flexDirection: 'row',
     backgroundColor: '#687DFB',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
     width: '100%',
-    height: '10%',
+    height: '11%',
     elevation: 5,
   },
   Body: {
     backgroundColor: '#ffffff',
     width: '100%',
-    height: '82%',
+    height: '81%',
   },
   Footer: {
     flexDirection: 'row',
@@ -155,7 +155,6 @@ const Components = StyleSheet.create({
     width: 270,
     height: 55,
     marginBottom: 5,
-    position: 'absolute',
   },
   More: {
     marginTop: 8,
